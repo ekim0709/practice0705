@@ -1,0 +1,25 @@
+<div class ="container">
+    <form style="margin-top:40px;" action="/home/write" method="POST">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+      </div>
+      <textarea class="form-control" rows="3" id="content" name="content"></textarea><br>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+  <% @posts.each do |p| %><br>
+      <div class="well">
+          <span style="font-weight:bold;"><%= p.title %></span><br>
+          <%= p.content %>
+            <% p.replies.each do |r| %>
+              <p><%= r.content %></p>
+            <% end %>
+          <form style="margin-top:40px;" action="/home/reply_write" method="POST">
+            <input type="hidden" value="<%= p.id %>" name="id_of_post">
+            <textarea class="form-control" rows="3" id="content" name="xylitol"></textarea><br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+  <% end %>
+</div>
